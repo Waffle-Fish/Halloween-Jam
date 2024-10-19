@@ -6,6 +6,8 @@ public class Cauldron : MonoBehaviour
 {
     private List<Ingredient> inCauldron;
 
+    // public Player player;        // player reference
+
     public Timer cookingTimer;
     public Timer burningTimer;
 
@@ -45,14 +47,21 @@ public class Cauldron : MonoBehaviour
     // Add an ingredient to the pot
     void AddIngredient(Ingredient ingr)
     {
-        inCauldron.Add(ingr);
+        if (inCauldron.Count <= 5)
+        {
+            inCauldron.Add(ingr);
 
-        if (cookingTimer.IsTimeCountingDown())
-        {
-            cookingTimer.ResetTimer();
-        } else
-        {
-            cookingTimer.StartCountdown();
+            // If the Player adds an additional ingredient, reseting the cooking timer 
+            if (cookingTimer.IsTimeCountingDown())
+            {
+                cookingTimer.ResetTimer();
+            
+            // If the Player adds an ingredient for the first time, 
+            }
+            else
+            {
+                cookingTimer.StartCountdown();
+            }
         }
 
         CheckIngredients();
@@ -61,7 +70,14 @@ public class Cauldron : MonoBehaviour
     // Check if ingredient enters pot
     void OnCollisionEnter(Collision collision)
     {
-        
-        
+        /*
+        if the collision is the player and the potion is grabbable
+        if grabbed
+            isPotionGrabbable = false;
+            inCauldron.clear();
+
+        if addIngredient
+            AddIngredient(the ingredient);
+        */
     }
 }

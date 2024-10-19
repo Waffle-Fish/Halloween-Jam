@@ -9,6 +9,8 @@ public class Timer : MonoBehaviour
     public bool isCountingDown = false;
     private bool isTimerFinished = false;
 
+    public string timerName;
+
     // Start is called before the first frame update
     void Start()
     {

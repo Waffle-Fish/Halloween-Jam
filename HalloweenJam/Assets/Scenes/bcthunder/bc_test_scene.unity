@@ -192,6 +192,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cookingTimer: {fileID: 57620913}
   burningTimer: {fileID: 57620912}
+  isPotionBurnt: 0
+  isPotionGrabbable: 0
 --- !u!212 &57620910
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -271,8 +273,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7b9c36d075699e4cb0f2321b1ddca5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxTime: 0
+  maxTime: 5
   isCountingDown: 0
+  timerName: BurningTimer
 --- !u!114 &57620913
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -285,8 +288,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7b9c36d075699e4cb0f2321b1ddca5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxTime: 0
+  maxTime: 5
   isCountingDown: 0
+  timerName: CookingTimer
 --- !u!1 &418079359
 GameObject:
   m_ObjectHideFlags: 0
