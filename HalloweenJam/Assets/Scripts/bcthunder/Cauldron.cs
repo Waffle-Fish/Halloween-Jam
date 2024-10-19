@@ -9,6 +9,9 @@ public class Cauldron : MonoBehaviour
     public Timer cookingTimer;
     public Timer burningTimer;
 
+    public bool isPotionBurnt = false;
+    public bool isPotionGrabbable = false;
+
     private void Awake()
     {
         cookingTimer = GetComponents<Timer>()[0];
@@ -24,10 +27,10 @@ public class Cauldron : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (cookingTimer.IsTimeCountingDown())
+        if (cookingTimer.CheckTimerFinished() && !burningTimer.IsTimeCountingDown())
         {
-
-        }
+            burningTimer.StartCountdown();
+        } else if (burningTimer.CheckTimerFinished()) { isPotionBurnt = true; }
     }
 
     // Check the ingredients in the cauldrons
@@ -35,7 +38,7 @@ public class Cauldron : MonoBehaviour
     {
         if (inCauldron.Count >= 3 && inCauldron.Count <= 5)
         {
-
+            isPotionGrabbable = true;
         }
     }
 
@@ -44,7 +47,13 @@ public class Cauldron : MonoBehaviour
     {
         inCauldron.Add(ingr);
 
-        cookingTimer.StartCountdown();
+        if (cookingTimer.IsTimeCountingDown())
+        {
+            cookingTimer.ResetTimer();
+        } else
+        {
+            cookingTimer.StartCountdown();
+        }
 
         CheckIngredients();
     }
@@ -52,13 +61,7 @@ public class Cauldron : MonoBehaviour
     // Check if ingredient enters pot
     void OnCollisionEnter(Collision collision)
     {
-        /*
-        foreach (Ingredient ingr in collision)
-        {
-            Debug.DrawRay(contact.point, contact.normal, Color.white);
-        }
-        if (collision.relativeVelocity.magnitude > 2)
-            audioSource.Play();
-        */
+        
+        
     }
 }

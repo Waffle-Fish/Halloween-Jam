@@ -7,6 +7,7 @@ public class Timer : MonoBehaviour
     public float maxTime;
     private float countdownTimer;
     public bool isCountingDown = false;
+    private bool isTimerFinished = false;
 
     // Start is called before the first frame update
     void Start()
@@ -21,14 +22,31 @@ public class Timer : MonoBehaviour
         {
             CountdownTimer();
         }
+
+        if (countdownTimer == 0)
+        {
+            StopCountdown();
+            isTimerFinished = true;
+
+        }
     }
 
     // Countdown the timer to zero
     public void CountdownTimer() { countdownTimer -= Time.deltaTime; }
 
+    public void ResetTimer()
+    {
+        countdownTimer = maxTime;
+    }
+
     public void StartCountdown()
     {
         if (!isCountingDown) { isCountingDown = true; }
+    }
+
+    public void StopCountdown()
+    {
+        if (isCountingDown) { isCountingDown = false;}
     }
 
     public bool IsTimeCountingDown()
@@ -36,9 +54,10 @@ public class Timer : MonoBehaviour
         return isCountingDown;
     }
 
-    public void StopCountdown()
+    public bool CheckTimerFinished()
     {
-        if (isCountingDown) { isCountingDown = false;}
+        return isTimerFinished;
     }
+
 
 }
