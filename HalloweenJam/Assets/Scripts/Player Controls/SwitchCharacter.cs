@@ -5,17 +5,28 @@ using UnityEngine;
 public class SwitchCharacter : MonoBehaviour
 {
     [SerializeField]
-    GameObject witch;
+    PlayerControls witch;
     [SerializeField]
-    GameObject broom;
+    PlayerControls broom;
+
+    GameObject witchCam;
+    GameObject broomCam;
 
     private void Awake() {
-        witch.SetActive(true);    
-        broom.SetActive(false);   
+        witchCam = witch.transform.GetChild(0).gameObject;
+        broomCam = broom.transform.GetChild(0).gameObject;
+        witchCam.SetActive(true);
+        broomCam.SetActive(false);
+        
+        witch.enabled = true;
+        broom.enabled = false;   
     }
 
     public void ToggleCharacters() {
-        witch.SetActive(!witch.activeSelf);
-        broom.SetActive(!broom.activeSelf);
+        witch.enabled = !witch.enabled;
+        broom.enabled = !broom.enabled;
+
+        witchCam.SetActive(!witchCam.activeSelf);
+        broomCam.SetActive(!broomCam.activeSelf);
     }
 }
