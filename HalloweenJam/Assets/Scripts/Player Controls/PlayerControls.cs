@@ -17,7 +17,7 @@ public class PlayerControls : MonoBehaviour
     PlayerInventory playerInventory;
 
 
-    private string objectCurrentlyOn;
+    private GameObject objectCurrentlyOn;
     
     private void Awake() {
         rb2D = GetComponent<Rigidbody2D>();
@@ -45,11 +45,11 @@ public class PlayerControls : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        objectCurrentlyOn = other.tag;
+        objectCurrentlyOn = other.gameObject;
     }
 
     private void OnTriggerExit2D(Collider2D other) {
-        objectCurrentlyOn = "none";
+        objectCurrentlyOn = null;
     }
 
     private void Move()
@@ -66,22 +66,28 @@ public class PlayerControls : MonoBehaviour
 
     private void OnDrop(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {
-        Debug.Log("I dropped ingredients");
+        Ingredient ingr = null;
+        if (playerInventory.InventoryCount() > 0) ingr = playerInventory.RemoveItem();
+        Debug.Log("Drop " + ingr.name);
     }
 
     private void OnInteract(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {
-        switch (objectCurrentlyOn)
+        switch (objectCurrentlyOn.tag)
         {
             case "Cauldron":
                 //Use cauldron
                 break;
             case "Barrel":
                 Debug.Log("I'm using the barrel");
-                // Use Barrel
+                PickUpIngredient();
                 break;
             default:
                 break;
         }
+    }
+
+    private void PickUpIngredient() {
+        playerInventory.AddToInventory(objectCurrentlyOn.GetComponent<Barrel>().ingr);
     }
 }
