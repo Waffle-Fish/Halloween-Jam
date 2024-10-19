@@ -5,61 +5,71 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     // Managing the Customers
-    float customerSpawnTime = 10;
-    bool isTimerCountingDown = false;
+    public static float[] orderTimers = { 45, 45, 45 };
+    public static float[] customerSpawnerTime = { 15, 15, 15 };
 
-    CustomerSpawner spawner;
-    CustomerBehavior customer;
+    public static CustomerSpawner[] customerSpawners = {new CustomerSpawner(), new CustomerSpawner(), new CustomerSpawner()};
+    public static CustomerBehavior[] customers = {null, null, null};
+    public static Potion[] customerPotions = { null, null, null };
     bool isCustomerSpawned;
+
+    // Managing Points
+    public int pointPerPotion = 10;
+    int totalPoints = 0;
+
+    // Level Duration
+    public float levelDuration = 
 
     // Start is called before the first frame update
     void Start()
     {
-        SpawnNewCustomer();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        // If Customer hasn't spawned and the spawn timer is not active, start countdown to spawn new customer
-        if (!isCustomerSpawned && !isTimerCountingDown)
+        // Handling Customer Spawns
+        for (int i = 0; i < customers.Length; i++ )
         {
-            isTimerCountingDown=true;
-        }
+            // If there is a customer, countdown their order time, else countdown their spawn time
+            if (customers[i] != null) {
+                orderTimers[i] -= Time.deltaTime;
+            } else {
+                customerSpawnerTime -= Time.deltaTime;
+            }
 
+            // If the order countdown finishes, customer leaves
+            if (orderTimers[i] <= 0) {
+                RemoveCustomer(i);
+            }
 
-        // If spawn timer is active, countdown
-        if (isTimerCountingDown)
-        {
-            countDown();
+            // If the customer spawn time finishes, spawn the customer
+            if (customerSpawnerTime[i]  <= 0) {
+                customerSpawnerTime[i] = 15;
+                customers[i] = customerSpawners[i].SpawnCustomer();
+            }
 
-            // When countdown is complete, spawn a new customer and reset the timer
-            if (customerSpawnTime <= 0)
-            {
-                SpawnNewCustomer();
-                ResetTimer();
+            // If the player gives the customer the right Potion score points, else "trash" the potion
+            if (customerPotions[i] != null) {
+                if (customers[i].order.orderedPotion == customerPotions[i])
+                {
+                    ScorePoints();
+                }
+                else
+                {
+                    customerPotions[i] = null;
+                }
             }
         }
     }
 
-    void ResetTimer()
+    void RemoveCustomer(int index)
     {
-        isTimerCountingDown = false;
-        customerSpawnTime = 10; 
+        Destroy(customers[index], 2.0);
+        orderTimers[index] = 45;
     }
 
-    void SpawnNewCustomer ()
-    {
-        spawner.SpawnCustomer();
-        if (spawner.customer != null)
-        {
-            isCustomerSpawned = true;
-            customer = spawner.customer;
-        }
-    }
+    void ScorePoints() { totalPoints += pointsPerPotion; }
 
-    void countDown()
-    {
-        customerSpawnTime -= Timer.detlaTime;
-    }
 }
