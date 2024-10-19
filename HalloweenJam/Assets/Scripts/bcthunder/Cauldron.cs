@@ -57,7 +57,6 @@ public class Cauldron : MonoBehaviour
             inCauldron.Add(ingr);
             cookingTimer.ResetTimer();
         }
-
         CheckIngredients();
     }
 

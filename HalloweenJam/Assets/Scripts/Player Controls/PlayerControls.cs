@@ -130,6 +130,7 @@ public class PlayerControls : MonoBehaviour
     private void UseCauldron()
     {
         if (!cauldron) { cauldron = objectCurrentlyOn.GetComponent<Cauldron>(); }
+        if (playerInventory.InventoryCount() <= 0) { return; }
         cauldron.AddIngredient(playerInventory.RemoveItem());
     }
 }
