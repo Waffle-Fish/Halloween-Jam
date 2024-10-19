@@ -2,20 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ingredient : MonoBehaviour
+[CreateAssetMenu(fileName = "Ingredient", menuName = "ScriptableObjects/Ingredients", order = 1)]
+public class Ingredient : ScriptableObject
 {
     public string ingredient_name;
     public Sprite ingredient_sprite;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 }

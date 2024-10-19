@@ -29,16 +29,27 @@ public class Cauldron : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // When the potion cooking timer is finished, start the burning timer
         if (cookingTimer.CheckTimerFinished() && !burningTimer.IsTimeCountingDown())
         {
             burningTimer.StartCountdown();
-        } else if (burningTimer.CheckTimerFinished()) { isPotionBurnt = true; }
+        } else if (burningTimer.CheckTimerFinished()) {
+            ClearCauldron();
+        }
+    }
+
+    // 
+    void ClearCauldron()
+    {
+        inCauldron.Clear();
+        cookingTimer.ResetTimer();
+        burningTimer.ResetTimer();
     }
 
     // Check the ingredients in the cauldrons
     void CheckIngredients()
     {
-        if (inCauldron.Count >= 3 && inCauldron.Count <= 5)
+        if (!cookingTimer.IsTimerCountingDown() && inCauldron.Count >= 1)
         {
             isPotionGrabbable = true;
         }
@@ -50,18 +61,7 @@ public class Cauldron : MonoBehaviour
         if (inCauldron.Count <= 5)
         {
             inCauldron.Add(ingr);
-
-            // If the Player adds an additional ingredient, reseting the cooking timer 
-            if (cookingTimer.IsTimeCountingDown())
-            {
-                cookingTimer.ResetTimer();
-            
-            // If the Player adds an ingredient for the first time, 
-            }
-            else
-            {
-                cookingTimer.StartCountdown();
-            }
+            cookingTimer.ResetTimer();
         }
 
         CheckIngredients();

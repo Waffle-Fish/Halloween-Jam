@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class Timer : MonoBehaviour
 {
-    public float maxTime;
+    public float maxCookingTime;
+    public float cookTimePerIngredient;
+
     private float countdownTimer;
+
     public bool isCountingDown = false;
     private bool isTimerFinished = false;
 
@@ -14,7 +17,7 @@ public class Timer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        float countdown = maxTime;
+        countdownTimer = maxTime;
     }
 
     // Update is called once per frame
@@ -25,7 +28,7 @@ public class Timer : MonoBehaviour
             CountdownTimer();
         }
 
-        if (countdownTimer == 0)
+        if (countdownTimer <= 0)
         {
             StopCountdown();
             isTimerFinished = true;
@@ -39,6 +42,7 @@ public class Timer : MonoBehaviour
     public void ResetTimer()
     {
         countdownTimer = maxTime;
+        isTimerFinished = false;
     }
 
     public void StartCountdown()
