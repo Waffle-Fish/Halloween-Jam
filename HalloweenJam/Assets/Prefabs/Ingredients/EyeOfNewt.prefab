@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1492597770110708761}
   - component: {fileID: 5558470722999603153}
   - component: {fileID: 609832675683202917}
+  - component: {fileID: -2707058114727275320}
   m_Layer: 6
   m_Name: EyeOfNewt
   m_TagString: Ingredient
@@ -106,6 +107,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &-2707058114727275320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2245791830572624176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdebe2b3510d802469091c491cef155c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ingredient: {fileID: 11400000, guid: b4663610b55167e49a2ec93c1a442fe4, type: 2}
 --- !u!1 &3948287837248803217
 GameObject:
   m_ObjectHideFlags: 0

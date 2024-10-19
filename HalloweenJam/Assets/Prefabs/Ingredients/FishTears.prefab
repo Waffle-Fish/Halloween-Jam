@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 128231064465741502}
   - component: {fileID: 8240138402707954536}
   - component: {fileID: 2632157611308756014}
+  - component: {fileID: -4171731227448329830}
   m_Layer: 6
   m_Name: FishTears
   m_TagString: Ingredient
@@ -106,6 +107,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &-4171731227448329830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5129174320186216659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdebe2b3510d802469091c491cef155c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ingredient: {fileID: 11400000, guid: c6617c7ad7d9fc04b80aa620c341b83d, type: 2}
 --- !u!1 &8271326706091892730
 GameObject:
   m_ObjectHideFlags: 0

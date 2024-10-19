@@ -50,7 +50,7 @@ public class Cauldron : MonoBehaviour
     }
 
     // Add an ingredient to the pot
-    void AddIngredient(Ingredient ingr)
+    public void AddIngredient(Ingredient ingr)
     {
         if (inCauldron.Count <= 5)
         {

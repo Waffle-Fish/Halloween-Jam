@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
 {
-    Stack<Ingredient> inventory = new();
+    List<Ingredient> inventory = new();
 
     public void AddToInventory(Ingredient ing) {
-        inventory.Push(ing);
+        inventory.Add(ing);
     }
 
     /// <summary>
@@ -15,7 +16,9 @@ public class PlayerInventory : MonoBehaviour
     /// </summary>
     /// <param name="ing"></param>
     public Ingredient RemoveItem() {
-        return inventory.Pop();
+        Ingredient ing = inventory[^1];
+        inventory.RemoveAt(inventory.Count - 1);
+        return ing;
     }
 
     public int InventoryCount() {

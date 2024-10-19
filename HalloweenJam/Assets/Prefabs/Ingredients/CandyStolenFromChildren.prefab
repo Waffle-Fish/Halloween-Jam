@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2156217646143969911}
   - component: {fileID: 7339736057281197505}
   - component: {fileID: 660322635967453184}
+  - component: {fileID: 4467613495879010410}
   m_Layer: 6
   m_Name: CandyStolenFromChildren
   m_TagString: Ingredient
@@ -106,6 +107,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &4467613495879010410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5001560807275971760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdebe2b3510d802469091c491cef155c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ingredient: {fileID: 11400000, guid: 75b97ee14d4dd4b43a6a4b7544f23fac, type: 2}
 --- !u!1 &7189112501089016638
 GameObject:
   m_ObjectHideFlags: 0

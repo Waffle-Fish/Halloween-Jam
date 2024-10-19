@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 653740444959538460}
   - component: {fileID: 5098138929627958304}
   - component: {fileID: 8211387683287908392}
+  - component: {fileID: 2188877900112774756}
   m_Layer: 6
   m_Name: MidtermExams
   m_TagString: Ingredient
@@ -106,6 +107,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &2188877900112774756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3642321655232558196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdebe2b3510d802469091c491cef155c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ingredient: {fileID: 11400000, guid: 1b9bf559321c01e49ad58eda8db3380f, type: 2}
 --- !u!1 &5814492806762778076
 GameObject:
   m_ObjectHideFlags: 0

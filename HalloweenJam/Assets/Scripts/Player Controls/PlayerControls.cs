@@ -17,10 +17,12 @@ public class PlayerControls : MonoBehaviour
     [Header("Food Interaction")]
     [SerializeField]
     List<ObjectPool> ingredientPools;
-    [SerializeField]
-    List<Ingredient> ingredientsList;
     PlayerInventory playerInventory;
     PlayerPickUp playerPickUp;
+
+    [Header("Cauldron")]
+    Cauldron cauldron;
+
 
 
     private GameObject objectCurrentlyOn;
@@ -103,7 +105,7 @@ public class PlayerControls : MonoBehaviour
         switch (objectCurrentlyOn.tag)
         {
             case "Cauldron":
-                //Use cauldron
+                UseCauldron();
                 break;
             case "Barrel":
                 GetIngredientFromBarrel();
@@ -121,7 +123,13 @@ public class PlayerControls : MonoBehaviour
     }
 
     private void PickUpIngredient() {
-        // playerInventory.AddToInventory(ingredientsList.Find(x => x.gameObject == objectCurrentlyOn.transform.parent.gameObject));
+        playerInventory.AddToInventory(objectCurrentlyOn.transform.parent.GetComponent<IngredientHolder>().ingredient);
         objectCurrentlyOn.SetActive(false);
+    }
+
+    private void UseCauldron()
+    {
+        if (!cauldron) { cauldron = objectCurrentlyOn.GetComponent<Cauldron>(); }
+        cauldron.AddIngredient(playerInventory.RemoveItem());
     }
 }
