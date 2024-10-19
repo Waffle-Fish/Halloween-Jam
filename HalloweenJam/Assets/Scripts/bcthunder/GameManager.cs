@@ -14,16 +14,16 @@ public class GameManager : MonoBehaviour
     bool isCustomerSpawned;
 
     // Managing Points
-    public int pointPerPotion = 10;
+    public int pointsPerPotion = 10;
     int totalPoints = 0;
 
     // Level Duration
-    public float levelDuration = 
+    public float levelDuration = 360;
 
     // Start is called before the first frame update
-    void Start()
+    void start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviour
 
     void RemoveCustomer(int index)
     {
-        Destroy(customers[index], 2.0);
+        Destroy(customers[index], 2);
         orderTimers[index] = 45;
     }
 

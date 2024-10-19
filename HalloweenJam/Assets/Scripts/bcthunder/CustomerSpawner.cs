@@ -10,7 +10,7 @@ public class CustomerSpawner : MonoBehaviour
 
     void start()
     {
-        transform.position = postion;
+        
     }
 
     void SpawnCustomer()

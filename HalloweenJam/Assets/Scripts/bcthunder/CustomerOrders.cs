@@ -13,11 +13,23 @@ public class CustomerOrders : MonoBehaviour
 
     public bool showOrderDisplay = false;
 
-    void MakeOrder()
+    void start()
+    {
+        string four = 4
+        for (int i =0 i < 8 i++) {
+            dostuff;
+        }
+    }
+
+    public void MakeOrder()
     {
         orderNumber = Random.Range(0, 6);
         orderedPotion = possiblePotions[orderNumber];
         orderDisplay = possibleOrderDisplay[orderNumber];
+    }
+
+    public void DisplayOrder()
+    {
         showOrderDisplay = true;
     }
 
