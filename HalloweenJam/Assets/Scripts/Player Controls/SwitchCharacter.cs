@@ -9,17 +9,16 @@ public class SwitchCharacter : MonoBehaviour
     [SerializeField]
     PlayerControls broom;
 
+    [SerializeField]
     GameObject witchCam;
+    [SerializeField]
     GameObject broomCam;
 
     private void Awake() {
-        witchCam = witch.transform.GetChild(0).gameObject;
-        broomCam = broom.transform.GetChild(0).gameObject;
-
-        // witchCam.SetActive(true);
-        // broomCam.SetActive(false);
-        // witch.enabled = true;
-        // broom.enabled = false;   
+        witchCam.SetActive(true);
+        broomCam.SetActive(false);
+        witch.enabled = true;
+        broom.enabled = false;   
     }
 
     public void ToggleCharacters() {

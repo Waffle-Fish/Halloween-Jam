@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: CandyStolenFromChildren
   m_EditorClassIdentifier: 
   ingredient_name: CandyStolenFromChildren
-  ingredient_sprite: {fileID: 0}
+  gameObject: {fileID: 5001560807275971760, guid: 4cc6dd72641521a4490b4c585a10cdaf, type: 3}

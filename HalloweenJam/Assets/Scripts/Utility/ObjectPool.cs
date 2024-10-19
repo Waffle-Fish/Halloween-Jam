@@ -5,10 +5,9 @@ using UnityEngine;
 public class ObjectPool : MonoBehaviour
 {
     [SerializeField]
-    private GameObject objectToCopy;
-
-    [SerializeField]
     private int maxObjectCount;
+    
+    public GameObject objectToCopy;
 
     public List<GameObject> objectPool = new();
 

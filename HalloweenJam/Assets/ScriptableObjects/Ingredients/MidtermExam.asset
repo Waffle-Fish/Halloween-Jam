@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: MidtermExam
   m_EditorClassIdentifier: 
   ingredient_name: MidtermExams
-  ingredient_sprite: {fileID: 0}
+  gameObject: {fileID: 3642321655232558196, guid: 4761fcb24f5cf134b99dc68cd040495f, type: 3}

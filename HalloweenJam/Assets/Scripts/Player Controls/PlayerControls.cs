@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerControls : MonoBehaviour
@@ -14,7 +15,12 @@ public class PlayerControls : MonoBehaviour
     SwitchCharacter switchCharacter;
 
     [Header("Food Interaction")]
+    [SerializeField]
+    List<ObjectPool> ingredientPools;
+    [SerializeField]
+    List<Ingredient> ingredientsList;
     PlayerInventory playerInventory;
+    PlayerPickUp playerPickUp;
 
 
     private GameObject objectCurrentlyOn;
@@ -22,6 +28,7 @@ public class PlayerControls : MonoBehaviour
     private void Awake() {
         rb2D = GetComponent<Rigidbody2D>();
         playerInventory = GetComponent<PlayerInventory>();
+        playerPickUp = GetComponent<PlayerPickUp>();
         
         playerInput = new();
         playerInput.Controls.SwitchCharacter.performed += OnControlSwitchCharacter;
@@ -66,20 +73,42 @@ public class PlayerControls : MonoBehaviour
 
     private void OnDrop(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {
+        ProcessDrop();
+    }
+
+    private void ProcessDrop()
+    {
         Ingredient ingr = null;
-        if (playerInventory.InventoryCount() > 0) ingr = playerInventory.RemoveItem();
-        Debug.Log("Drop " + ingr.name);
+        GameObject ingrToDrop = null;
+        ObjectPool ingrToDropPool = null;
+        if (playerInventory.InventoryCount() <= 0) return;
+
+        // Getting referenc to ingredient
+        ingr = playerInventory.RemoveItem();
+        foreach (var pool in ingredientPools)
+        {
+            if (pool.objectToCopy == ingr.gameObject) ingrToDropPool = pool;
+        }
+        if (!ingrToDropPool) throw new Exception(ingr.name + " not in object pool");
+
+        // Dropping ingredient
+        ingrToDrop = ingrToDropPool.GetObject();
+        ingrToDrop.transform.position = transform.position;
+        ingrToDrop.SetActive(true);
     }
 
     private void OnInteract(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {
+        if (!objectCurrentlyOn) { return;}
         switch (objectCurrentlyOn.tag)
         {
             case "Cauldron":
                 //Use cauldron
                 break;
             case "Barrel":
-                Debug.Log("I'm using the barrel");
+                GetIngredientFromBarrel();
+                break;
+            case "Ingredient":
                 PickUpIngredient();
                 break;
             default:
@@ -87,7 +116,12 @@ public class PlayerControls : MonoBehaviour
         }
     }
 
-    private void PickUpIngredient() {
+    private void GetIngredientFromBarrel() {
         playerInventory.AddToInventory(objectCurrentlyOn.GetComponent<Barrel>().ingr);
+    }
+
+    private void PickUpIngredient() {
+        // playerInventory.AddToInventory(ingredientsList.Find(x => x.gameObject == objectCurrentlyOn.transform.parent.gameObject));
+        objectCurrentlyOn.SetActive(false);
     }
 }

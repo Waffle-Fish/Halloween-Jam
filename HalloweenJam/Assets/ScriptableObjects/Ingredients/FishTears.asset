@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: FishTears
   m_EditorClassIdentifier: 
   ingredient_name: FishTears
-  ingredient_sprite: {fileID: 0}
+  gameObject: {fileID: 5129174320186216659, guid: ed17cc5a6ed882e4887b8647fc7e3794, type: 3}
