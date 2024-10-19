@@ -14,12 +14,6 @@ public class Timer : MonoBehaviour
 
     public string timerName;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        countdownTimer = maxTime;
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -41,7 +35,7 @@ public class Timer : MonoBehaviour
 
     public void ResetTimer()
     {
-        countdownTimer = maxTime;
+        countdownTimer = maxCookingTime;
         isTimerFinished = false;
     }
 
@@ -55,7 +49,7 @@ public class Timer : MonoBehaviour
         if (isCountingDown) { isCountingDown = false;}
     }
 
-    public bool IsTimeCountingDown()
+    public bool IsTimerCountingDown()
     {
         return isCountingDown;
     }

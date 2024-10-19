@@ -20,17 +20,11 @@ public class Cauldron : MonoBehaviour
         burningTimer = GetComponents<Timer>()[1];
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
     // Update is called once per frame
     void Update()
     {
         // When the potion cooking timer is finished, start the burning timer
-        if (cookingTimer.CheckTimerFinished() && !burningTimer.IsTimeCountingDown())
+        if (cookingTimer.CheckTimerFinished() && !burningTimer.IsTimerCountingDown())
         {
             burningTimer.StartCountdown();
         } else if (burningTimer.CheckTimerFinished()) {

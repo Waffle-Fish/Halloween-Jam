@@ -4,24 +4,21 @@ using UnityEngine;
 
 public class CustomerOrders : MonoBehaviour
 {
-    public Dictionary<string, List<Ingredient>> recipe_book = new Dictionary<string, List<Ingredient>>
-    {
-        { "LovePotion", ['MidnightOrchid', 'FishTears', 'EyeOfNewt']},
-        { "HairGrowth", ['MidtermExam', 'MidtermExam', 'CandyStolenFromChild'] },
-        { "Poison", ["MidtermExam", "FishTears"] },
-        { "Health", ["MidnightOrchid", "EyeOfNewt"] },
-        { "" }
-    };
+    public List<Potion> possiblePotions;
+    public List<GameObject> possibleOrderDisplay;
 
-    // Start is called before the first frame update
-    void Start()
+    public Potion orderedPotion;
+    public int orderNumber;
+    public GameObject orderDisplay;
+
+    public bool showOrderDisplay = false;
+
+    void MakeOrder()
     {
-        
+        orderNumber = Random.Range(0, 6);
+        orderedPotion = possiblePotions[orderNumber];
+        orderDisplay = possibleOrderDisplay[orderNumber];
+        showOrderDisplay = true;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
