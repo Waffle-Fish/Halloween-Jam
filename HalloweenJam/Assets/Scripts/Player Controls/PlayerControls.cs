@@ -3,17 +3,25 @@ using UnityEngine;
 
 public class PlayerControls : MonoBehaviour
 {
+    [Header("Movement")]
     [SerializeField]
     float moveForce;
     PlayerInput playerInput;
     Vector2 moveDir = new();
     Rigidbody2D rb2D;
+
+    [Header("Swap Char")]
     SwitchCharacter switchCharacter;
+
+    [Header("Food Interaction")]
+    PlayerInventory playerInventory;
+
 
     private string objectCurrentlyOn;
     
     private void Awake() {
         rb2D = GetComponent<Rigidbody2D>();
+        playerInventory = GetComponent<PlayerInventory>();
         
         playerInput = new();
         playerInput.Controls.SwitchCharacter.performed += OnControlSwitchCharacter;
