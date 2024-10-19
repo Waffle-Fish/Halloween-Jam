@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8093f19cde33bea479214f13b829cea8, type: 3}
+  m_Name: HairGrowthPotion
+  m_EditorClassIdentifier: 
+  potion_name: LovePotion
+  ingredients:
+  - {fileID: 11400000, guid: 1b9bf559321c01e49ad58eda8db3380f, type: 2}
+  - {fileID: 11400000, guid: 1b9bf559321c01e49ad58eda8db3380f, type: 2}
+  - {fileID: 11400000, guid: 75b97ee14d4dd4b43a6a4b7544f23fac, type: 2}
