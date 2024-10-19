@@ -75,7 +75,11 @@ public class PlayerControls : MonoBehaviour
 
     private void OnDrop(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {
-        ProcessDrop();
+        if (objectCurrentlyOn && objectCurrentlyOn.CompareTag("Cauldron")) {
+            UseCauldron();
+        } else {
+            ProcessDrop();
+        }
     }
 
     private void ProcessDrop()
@@ -104,9 +108,6 @@ public class PlayerControls : MonoBehaviour
         if (!objectCurrentlyOn) { return;}
         switch (objectCurrentlyOn.tag)
         {
-            case "Cauldron":
-                UseCauldron();
-                break;
             case "Barrel":
                 GetIngredientFromBarrel();
                 break;
