@@ -177,7 +177,7 @@ public class PlayerControls : MonoBehaviour
     }
 
     private void PickUpIngredient() {
-        if (playerInventory.InventoryCount() > maxStackSize) return;
+        if (playerInventory.InventoryCount() > maxStackSize || currentPotion) return;
         Ingredient ingr = objectCurrentlyOn.transform.parent.GetComponent<IngredientHolder>().ingredient;
 
         playerInventory.AddToInventory(ingr);
@@ -195,9 +195,13 @@ public class PlayerControls : MonoBehaviour
 
     private void ThrowAway()
     {
-        if (playerInventory.InventoryCount() <= 0) { return; }
-        DropTop();
-        playerInventory.RemoveItem();
+        if (currentPotion) {
+            currentPotion = null;
+            potionArt.GetComponent<SpriteRenderer>().sprite = null;
+        } else if (playerInventory.InventoryCount() > 0 ) { 
+            DropTop();
+            playerInventory.RemoveItem();
+        }
     }
 
     private void CollectPotion() {

@@ -17,7 +17,6 @@ public class Cauldron : MonoBehaviour
     private Potion badPotion;
     public bool IsPotionGrabbable { get; private set; } = false;
     public List<Ingredient> inCauldron = new();
-    private int numIngrAdded = 0;
 
     [SerializeField]
     GameObject doneSparkles;
@@ -33,11 +32,16 @@ public class Cauldron : MonoBehaviour
 
     void Update()
     {
-        if (inCauldron.Count <= 0) return;
+        if (inCauldron.Count <= 0) {
+            doneSparkles.SetActive(false);
+            cookSparkles.SetActive(false);
+            return; 
+        }
+
 
         // Cook pot
         Stopwatch += Time.deltaTime;
-        IsPotionGrabbable = Stopwatch >= TotalCookingDuration();
+        IsPotionGrabbable = Stopwatch >= cookingTime;
         doneSparkles.SetActive(IsPotionGrabbable);
         cookSparkles.SetActive(!IsPotionGrabbable);
     }
@@ -67,13 +71,14 @@ public class Cauldron : MonoBehaviour
         return foundPotion;
     }
 
-    public float TotalCookingDuration() {
-        return cookingTime * inCauldron.Count;
-    }
+    // public float TotalCookingDuration() {
+    //     return cookingTime * inCauldron.Count;
+    // }
 
     void ClearCauldron()
     {
         inCauldron.Clear();
+        IsPotionGrabbable = false;
         ResetStopwatch();
     }
 
