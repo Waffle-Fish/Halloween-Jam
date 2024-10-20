@@ -14,6 +14,7 @@ public class CustomerSpawner : MonoBehaviour
     Transform targetWalkPoint;
 
     GameObject customer;
+    Animator customerAnimator;
     CustomerBehavior customer_script;
     CustomerOrders order;
     bool showOrder = true;
@@ -27,6 +28,7 @@ public class CustomerSpawner : MonoBehaviour
 
     void Update(){
         if (customer != null) {
+            customerAnimator.SetBool("walkDown", false);
             customer.transform.position = Vector2.MoveTowards(customer.transform.position, targetWalkPoint.transform.position, moveSpeed * Time.deltaTime);
 
             if (showOrder && customer.transform.position == walkPoints[1].transform.position) {
@@ -35,6 +37,7 @@ public class CustomerSpawner : MonoBehaviour
             }
 
             if (leaveBar) {
+                customerAnimator.SetBool("walkDown", true);
                 customer.transform.position = Vector2.MoveTowards(customer.transform.position, targetWalkPoint.transform.position, moveSpeed * Time.deltaTime);
 
                 if (customer.transform.position == walkPoints[0].transform.position) {
@@ -51,6 +54,7 @@ public class CustomerSpawner : MonoBehaviour
     {
         customer = Instantiate(customerPrefab, transform.position, Quaternion.identity);
         customer.transform.position = walkPoints[0].transform.position;
+        customerAnimator = customer.GetComponent<Animator>();
         customer_script = customer.GetComponent<CustomerBehavior>();
         order = customer.GetComponent<CustomerOrders>();
         leaveBar = false;

@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 3043551479152943238}
   - component: {fileID: 2079859475913748283}
   - component: {fileID: 3498775799532298762}
-  - component: {fileID: 3923130769181988931}
+  - component: {fileID: 1398987797976782951}
+  - component: {fileID: 8076101097347814499}
   m_Layer: 0
-  m_Name: Customer3
+  m_Name: BlackCatCustomer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,8 +76,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
-  m_Color: {r: 0.35754701, g: 0.7294118, b: 0.031372562, a: 1}
+  m_Sprite: {fileID: -1052762721, guid: 6a4a04f9487dc964fb96d48af33aae49, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -98,11 +99,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3935f85c9539f084fbb216e776343fc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkPoints: []
-  moveSpeed: 10
-  customerSprite: {fileID: 0}
   order: {fileID: 0}
---- !u!114 &3923130769181988931
+  animator: {fileID: 8076101097347814499}
+--- !u!114 &1398987797976782951
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -131,3 +130,24 @@ MonoBehaviour:
   orderedPotion: {fileID: 0}
   orderNumber: 0
   orderDisplay: {fileID: 0}
+--- !u!95 &8076101097347814499
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4775940166139379129}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1678973fbc96d1749b28b1648311b04e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

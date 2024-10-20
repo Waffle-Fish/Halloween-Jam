@@ -8,9 +8,11 @@ using UnityEngine;
 public class CustomerBehavior : MonoBehaviour
 {
     public CustomerOrders order;
+    public Animator animator;
 
     void Awake() {
         order = GetComponent<CustomerOrders>();
+        animator = GetComponent<Animator>();
     }
 
     // Start is called before the first frame update
