@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 818528885229427470}
   - component: {fileID: 3582670243857420477}
   m_Layer: 0
-  m_Name: EyeOfNewt
+  m_Name: EyeOfDragon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,9 +26,9 @@ Transform:
   m_GameObject: {fileID: 887739851932819319}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.286, y: -0, z: 0}
-  m_LocalScale: {x: 0.24017963, y: 0.99509794, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 5, y: -0.9, z: 0}
+  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 8288280481757986496}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -73,8 +73,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.0522716, g: 0.6150943, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: b1ddca900b28e124196a1974be45c34a, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -110,9 +110,9 @@ Transform:
   m_GameObject: {fileID: 1142729117698429314}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.035, y: -0, z: 0}
-  m_LocalScale: {x: 0.24017963, y: 0.99509794, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 0, y: -0.9, z: 0}
+  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 8288280481757986496}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -157,8 +157,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.1547383, g: 0.6283538, b: 0.79622644, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 969a95b5fbd03324b9fda138275aa5bc, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -195,9 +195,9 @@ Transform:
   m_GameObject: {fileID: 2531123035899210407}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.33, y: -0.02, z: 0}
-  m_LocalScale: {x: 0.24017963, y: 0.99509794, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: -5, y: -0.9, z: 0}
+  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 8288280481757986496}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -242,8 +242,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.7735849, g: 0.016055519, b: 0.5275621, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 68c8055785492d64d8c95a8974c043bf, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -280,6 +280,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8288280481757986496}
   - component: {fileID: 7660702596987933349}
+  - component: {fileID: 865744801647045972}
   m_Layer: 0
   m_Name: OrderLove
   m_TagString: Untagged
@@ -296,9 +297,9 @@ Transform:
   m_GameObject: {fileID: 7406920217386039857}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.39, y: 0.65, z: 0}
-  m_LocalScale: {x: 4.1635504, y: 1.0049262, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8462125509472650147}
   - {fileID: 2714116633006296923}
@@ -346,7 +347,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -60
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 480a11813ec523546bdb17e740709fe4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -357,3 +358,15 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!210 &865744801647045972
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7406920217386039857}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 1
+  m_SortAtRoot: 0

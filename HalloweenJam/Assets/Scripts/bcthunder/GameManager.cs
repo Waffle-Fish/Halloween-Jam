@@ -48,7 +48,6 @@ public class GameManager : MonoBehaviour
 
             // If the customer spawn time finishes, spawn the customer
             if (customerSpawnerTime[i]  <= 0) {
-                Debug.Log("Customer " + i + " Spawned!");
                 customerSpawnerTime[i] = 15;
                 customerSpawners[i].SpawnCustomer();
                 customers[i] = customerSpawners[i].GetCustomer();
@@ -70,8 +69,9 @@ public class GameManager : MonoBehaviour
     }
 
     void RemoveCustomer(int index)
-    {
-        Destroy(customers[index], 2);
+    {   
+        customerSpawners[index].RemoveCustomer();
+        customers[index] = null;
         orderTimers[index] = 45;
     }
 

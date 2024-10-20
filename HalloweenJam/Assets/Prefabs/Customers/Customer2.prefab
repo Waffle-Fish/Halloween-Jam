@@ -11,13 +11,14 @@ GameObject:
   - component: {fileID: 3043551479152943238}
   - component: {fileID: 2079859475913748283}
   - component: {fileID: 3498775799532298762}
+  - component: {fileID: -4124776458619326254}
   m_Layer: 0
   m_Name: Customer2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3043551479152943238
 Transform:
   m_ObjectHideFlags: 0
@@ -27,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 4775940166139379129}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.15, y: -2, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -100,5 +101,33 @@ MonoBehaviour:
   walkPoints: []
   moveSpeed: 10
   customerSprite: {fileID: 0}
-  isReadyToOrder: 1
   order: {fileID: 0}
+--- !u!114 &-4124776458619326254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4775940166139379129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ade90ea36e015b246bc8a8c2752d675b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  possiblePotions:
+  - {fileID: 11400000, guid: b9a71ac58bf25e24397131828f11c5a5, type: 2}
+  - {fileID: 11400000, guid: 149bc586dc31f294681643d7f5f77a2b, type: 2}
+  - {fileID: 11400000, guid: 4642ab1068dc1dc4b9477ff00fc73885, type: 2}
+  - {fileID: 11400000, guid: 4f07d6086bab10846b7226f5be83cb8f, type: 2}
+  - {fileID: 11400000, guid: f7bdf1ee1be4a3b4682c64264e535a02, type: 2}
+  - {fileID: 11400000, guid: b38e494533431304abcaa1619488e452, type: 2}
+  possibleOrderDisplay:
+  - {fileID: 684045812135518226, guid: c53553d2aa1c27448b027524e37a4af8, type: 3}
+  - {fileID: 1058627160588171416, guid: 4f84be022f3fbe14f953a3f2e50e0bee, type: 3}
+  - {fileID: 7406920217386039857, guid: b8faba458050af84b82051f02149b2e3, type: 3}
+  - {fileID: 2467109155375764363, guid: 4123417930057f940bc6f10f06d7c1eb, type: 3}
+  - {fileID: 8846633237349893781, guid: 81767a0dd6ea86546a432c45d480eb1a, type: 3}
+  - {fileID: 8390041905574310448, guid: 35ae57ca06f6af741821f56f8a188438, type: 3}
+  orderedPotion: {fileID: 0}
+  orderNumber: 0
+  orderDisplay: {fileID: 0}

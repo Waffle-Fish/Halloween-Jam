@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CustomerOrders : MonoBehaviour
 {
-    public List<Potion> possiblePotions;        // List of possible potions to make (Changed to game object)
-    public List<GameObject> possibleOrderDisplay;
+    public List<Potion> possiblePotions = new();        // List of possible potions to make (Changed to game object)
+    public List<GameObject> possibleOrderDisplay = new();
 
     public Potion orderedPotion;
     public int orderNumber;
@@ -15,21 +15,33 @@ public class CustomerOrders : MonoBehaviour
 
     void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteRenderer.enabled = false;
         MakeOrder();
     }
 
     public void MakeOrder()
     {
-        orderNumber = Random.Range(0, 6);
+        orderNumber = Random.Range(0, 5);
         orderedPotion = possiblePotions[orderNumber];
-        orderDisplay = possibleOrderDisplay[orderNumber];
+        orderDisplay = Instantiate(possibleOrderDisplay[orderNumber], transform.position, Quaternion.identity, transform);
+        orderDisplay.SetActive(false);
+        // spriteRenderer = orderDisplay.GetComponent<SpriteRenderer>();
+        // spriteRenderer.enabled = !spriteRenderer.enabled;
     }
 
     public void DisplayOrder()
     {
-        spriteRenderer.enabled = true;
+        Debug.Log("Show the order");
+        orderDisplay.transform.position = this.transform.position + new UnityEngine.Vector3(0, -1 , 0);
+        orderDisplay.SetActive(true);
+        // spriteRenderer.enabled = !spriteRenderer.enabled;
+
+        // Debug.Log("Is order showing: " + spriteRenderer.enabled.ToString());
+    }
+
+    public void HideOrder()
+    {
+        Debug.Log("Hide the order");
+        spriteRenderer.enabled = !spriteRenderer.enabled;
     }
 
 }
