@@ -4,74 +4,81 @@ using UnityEngine;
 
 public class Cauldron : MonoBehaviour
 {
-    private List<Ingredient> inCauldron;
+    [Header("Timer")]
+    [SerializeField]
+    [Tooltip("How long it takes to cook one ingredient")]
+    private int cookingTime;
+    [SerializeField]
+    [Tooltip("How long it takes to burn the whole pot")]
+    private int burnTime;
+    private float stopwatch;
 
-    // public Player player;        // player reference
+    [Header("Potion stuff")]
+    [SerializeField]
+    private List<Potion> potionList;
+    [SerializeField]
+    private Potion badPotion;
+    public bool IsPotionGrabbable { get; private set; } = false;
+    private List<Ingredient> inCauldron = new();
 
-    public Timer cookingTimer;
-    public Timer burningTimer;
-
-    public bool isPotionBurnt = false;
-    public bool isPotionGrabbable = false;
-
-    private void Awake()
-    {
-        cookingTimer = GetComponents<Timer>()[0];
-        burningTimer = GetComponents<Timer>()[1];
+    private void Awake() {
+        foreach (Potion potion in potionList)
+        {
+            potion.totalValue = CalculatePotionValue(potion);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        // When the potion cooking timer is finished, start the burning timer
-        if (cookingTimer.CheckTimerFinished() && !burningTimer.IsTimerCountingDown())
-        {
-            burningTimer.StartCountdown();
-        } else if (burningTimer.CheckTimerFinished()) {
+        if (inCauldron.Count <= 0) return;
+        stopwatch += Time.deltaTime;
+        IsPotionGrabbable = stopwatch >= cookingTime * inCauldron.Count;
+        if (stopwatch >= cookingTime * inCauldron.Count + burnTime) {
             ClearCauldron();
         }
     }
 
-    // 
     void ClearCauldron()
     {
         inCauldron.Clear();
-        cookingTimer.ResetTimer();
-        burningTimer.ResetTimer();
+        ResetStopwatch();
     }
 
-    // Check the ingredients in the cauldrons
-    void CheckIngredients()
-    {
-        if (!cookingTimer.IsTimerCountingDown() && inCauldron.Count >= 1)
-        {
-            isPotionGrabbable = true;
-        }
+    private void ResetStopwatch() {
+        stopwatch = 0f;
     }
 
     // Add an ingredient to the pot
-    void AddIngredient(Ingredient ingr)
+    public void AddIngredient(Ingredient ingr)
     {
         if (inCauldron.Count <= 5)
         {
             inCauldron.Add(ingr);
-            cookingTimer.ResetTimer();
+            ResetStopwatch();
         }
-
-        CheckIngredients();
     }
 
-    // Check if ingredient enters pot
-    void OnCollisionEnter(Collision collision)
+    public Potion CollectPotion()
     {
-        /*
-        if the collision is the player and the potion is grabbable
-        if grabbed
-            isPotionGrabbable = false;
-            inCauldron.clear();
+        if (inCauldron.Count <= 0) { return null;}
+        int value = 0;
+        foreach (Ingredient ingr in inCauldron)
+        {
+            value += ingr.value;
+        }
+        Potion foundPotion = potionList.Find(x => x.totalValue == value);
+        if (foundPotion == null) { foundPotion = badPotion;}
+        ClearCauldron();
+        return foundPotion;
+    }
 
-        if addIngredient
-            AddIngredient(the ingredient);
-        */
+    private int CalculatePotionValue(Potion p) {
+        int value = 0;
+        foreach (var ingr in p.ingredients)
+        {
+            value += ingr.value;
+        }
+        return value;
     }
 }

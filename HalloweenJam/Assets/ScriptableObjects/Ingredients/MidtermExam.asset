@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredient_name: MidtermExams
   gameObject: {fileID: 3642321655232558196, guid: 4761fcb24f5cf134b99dc68cd040495f, type: 3}
+  value: 10000

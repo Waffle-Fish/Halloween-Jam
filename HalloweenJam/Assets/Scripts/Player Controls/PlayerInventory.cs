@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
@@ -19,6 +20,7 @@ public class PlayerInventory : MonoBehaviour
     }
 
     public int InventoryCount() {
+        // Debug.Log(inventory.Count);
         return inventory.Count;
     }
 }

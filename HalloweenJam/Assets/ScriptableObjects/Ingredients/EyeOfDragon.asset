@@ -10,7 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b91591bc953d0a64cbea6c26d5c0385e, type: 3}
-  m_Name: EyeOfNewt
+  m_Name: EyeOfDragon
   m_EditorClassIdentifier: 
   ingredient_name: EyeOfNewt
   gameObject: {fileID: 2245791830572624176, guid: 696b1a5c91eac6648900757ad3c77e29, type: 3}
+  value: 10
