@@ -25,6 +25,9 @@ public class Cauldron : MonoBehaviour
     public List<Ingredient> inCauldron = new();
     private int numIngrAdded = 0;
 
+    [SerializeField]
+    GameObject doneSparkles;
+
     private void Awake() {
         foreach (Potion potion in potionList)
         {
@@ -58,21 +61,31 @@ public class Cauldron : MonoBehaviour
     }
 
     // Add an ingredient to the pot
+
+    // Old way
+    // public void AddIngredient(Ingredient ingr)
+    // {
+    //     if (IsFull()) return;
+    //     inCauldron.Add(ingr);
+    //     numIngrAdded++;
+    //     if (!cookDisplay.gameObject.activeInHierarchy) cookDisplay.gameObject.SetActive(true);
+    //     if (burnDisplay.gameObject.activeInHierarchy) {
+    //         burnDisplay.gameObject.SetActive(false);
+    //         Stopwatch = TotalCookingDuration() - cookingTime;
+    //         cookDisplay.SetDuration(cookingTime);
+    //         numIngrAdded = 1;
+    //     } else {
+    //         cookDisplay.SetDuration(TotalCookingDuration());
+    //         cookDisplay.ReCenterBar(numIngrAdded);
+    //     }
+    // }
+
     public void AddIngredient(Ingredient ingr)
     {
         if (IsFull()) return;
         inCauldron.Add(ingr);
-        numIngrAdded++;
         if (!cookDisplay.gameObject.activeInHierarchy) cookDisplay.gameObject.SetActive(true);
-        if (burnDisplay.gameObject.activeInHierarchy) {
-            burnDisplay.gameObject.SetActive(false);
-            Stopwatch = TotalCookingDuration() - cookingTime;
-            cookDisplay.SetDuration(cookingTime);
-            numIngrAdded = 1;
-        } else {
-            cookDisplay.SetDuration(TotalCookingDuration());
-            cookDisplay.ReCenterBar(numIngrAdded);
-        }
+
     }
 
     public bool IsFull() {
