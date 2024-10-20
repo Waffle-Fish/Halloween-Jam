@@ -32,11 +32,9 @@ public class Cauldron : MonoBehaviour
     }
 
     private void Start() {
-        cookDisplay.SetDuration(cookingTime);
         burnDisplay.SetDuration(burnTime);
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (inCauldron.Count <= 0) return;
@@ -44,13 +42,16 @@ public class Cauldron : MonoBehaviour
         // Cook pot
         if (!cookDisplay.gameObject.activeInHierarchy) cookDisplay.gameObject.SetActive(true);
         Stopwatch += Time.deltaTime;
-        IsPotionGrabbable = Stopwatch >= cookingTime * inCauldron.Count;
+        IsPotionGrabbable = Stopwatch >= TotalCookingDuration();
 
         // Burn Pot
-        // if (IsPotionGrabbable & !burnDisplay.gameObject.activeInHierarchy) {
-        //     burnDisplay.gameObject.SetActive(true);
-        // }
-        if (Stopwatch >= cookingTime * inCauldron.Count + burnTime) {
+        if (IsPotionGrabbable) {
+            cookDisplay.gameObject.SetActive(false);
+            if (!burnDisplay.gameObject.activeInHierarchy) {
+                burnDisplay.gameObject.SetActive(true);
+            }
+        }
+        if (Stopwatch >= TotalCookingDuration() + burnTime) {
             ClearCauldron();
         }
     }
@@ -60,8 +61,14 @@ public class Cauldron : MonoBehaviour
     {
         if (IsFull()) return;
         inCauldron.Add(ingr);
-        cookDisplay.SetDuration(cookDisplay.Duration + cookingTime);
-        burnDisplay.gameObject.SetActive(false);
+        if (!cookDisplay.gameObject.activeInHierarchy) cookDisplay.gameObject.SetActive(true);
+        if (burnDisplay.gameObject.activeInHierarchy) {
+            burnDisplay.gameObject.SetActive(false);
+            ResetStopwatch();
+            cookDisplay.SetDuration(cookingTime);
+        } else {
+            cookDisplay.SetDuration(TotalCookingDuration());
+        }
     }
 
     public bool IsFull() {
@@ -80,6 +87,10 @@ public class Cauldron : MonoBehaviour
         if (foundPotion == null) { foundPotion = badPotion;}
         ClearCauldron();
         return foundPotion;
+    }
+
+    public float TotalCookingDuration() {
+        return cookingTime * inCauldron.Count;
     }
 
     void ClearCauldron()
