@@ -5,11 +5,11 @@ using TMPro;
 
 public class GameOverMenu : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI scoreText;   
-    [SerializeField] GameManager gm;
+    [SerializeField] TextMeshProUGUI scoreText;
+
     // Start is called before the first frame update
     void Start()
     {
-        // scoreText = scoreText + gm.totalScore.toString();
+        scoreText.text = "Score: " + GameManager.Instance.totalPoints.ToString();
     }
 }

@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     // Managing Points
     public int pointsPerPotion = 10;
     public int pointsLost = 5;
-    int totalPoints = 0;
+    public int totalPoints = 0;
 
     // Level Duration
     public float levelDuration = 420;
