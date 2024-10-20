@@ -8566,7 +8566,7 @@ MonoBehaviour:
   pointsPerPotion: 10
   pointsLost: 5
   totalPoints: 0
-  levelDuration: 5
+  levelDuration: 362
 --- !u!1 &1806065752
 GameObject:
   m_ObjectHideFlags: 0
