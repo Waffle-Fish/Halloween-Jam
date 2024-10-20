@@ -58,17 +58,14 @@ public class Cauldron : MonoBehaviour
     // Add an ingredient to the pot
     public void AddIngredient(Ingredient ingr)
     {
-        if (IsFull())
-        {
-            inCauldron.Add(ingr);
-            cookDisplay.SetDuration(cookDisplay.Duration + cookingTime);
-            burnDisplay.gameObject.SetActive(false);
-            // ResetStopwatch();
-        }
+        if (IsFull()) return;
+        inCauldron.Add(ingr);
+        cookDisplay.SetDuration(cookDisplay.Duration + cookingTime);
+        burnDisplay.gameObject.SetActive(false);
     }
 
     public bool IsFull() {
-        return inCauldron.Count < 5;
+        return inCauldron.Count >= 5;
     }
 
     public Potion CollectPotion()
@@ -88,6 +85,8 @@ public class Cauldron : MonoBehaviour
     void ClearCauldron()
     {
         inCauldron.Clear();
+        cookDisplay.gameObject.SetActive(false);
+        burnDisplay.gameObject.SetActive(false);
         ResetStopwatch();
     }
 
