@@ -27,9 +27,12 @@ public class PlayerControls : MonoBehaviour
     [SerializeField]
     [Range(0,5)]
     private int maxStackSize = 5;
-    Potion currentPotion;
+    [SerializeField]
+    GameObject potionArt;
     // Reference to the game objects that the character carries in the world
-    List<GameObject> itemArt = new();
+    List<GameObject> ingredientArt = new();
+    Potion currentPotion;
+    
 
     private GameObject objectCurrentlyOn;
     
@@ -48,7 +51,7 @@ public class PlayerControls : MonoBehaviour
     private void Start() {
         for (int i = 0; i < maxStackSize; i++)
         {
-            itemArt.Add(transform.GetChild(i).gameObject);
+            ingredientArt.Add(transform.GetChild(i).gameObject);
         }
 
     }
@@ -117,7 +120,7 @@ public class PlayerControls : MonoBehaviour
 
         // Dropping ingredient
         ingrToDrop = ingrToDropPool.GetObject();
-        Vector3 dropPos = itemArt[0].transform.position;
+        Vector3 dropPos = ingredientArt[0].transform.position;
         dropPos.y -= 1.5f;
         ingrToDrop.transform.position = dropPos;
         ingrToDrop.SetActive(true);
@@ -169,7 +172,7 @@ public class PlayerControls : MonoBehaviour
     private void CollectPotion() {
         currentPotion = objectCurrentlyOn.GetComponent<Cauldron>().CollectPotion();
         if (!currentPotion) return;
-        ChangeItemArt(currentPotion.potionObject);
+        potionArt.GetComponent<SpriteRenderer>().sprite = currentPotion.potionObject.GetComponentInChildren<SpriteRenderer>().sprite ;
     }
 
     private void GivePotion() {
@@ -177,14 +180,14 @@ public class PlayerControls : MonoBehaviour
     }
 
     private void ChangeItemArt(GameObject newItem) {
-        int index = math.clamp(playerInventory.InventoryCount(),0,maxStackSize);
+        int index = math.clamp(playerInventory.InventoryCount()-1,0,maxStackSize);
         if (index >= maxStackSize) { return; }
-        itemArt[index].GetComponentInChildren<SpriteRenderer>().sprite = newItem.GetComponent<SpriteRenderer>().sprite;
+        ingredientArt[index].GetComponentInChildren<SpriteRenderer>().sprite = newItem.GetComponent<SpriteRenderer>().sprite;
     }
 
     private void DropTop() {
         int index = playerInventory.InventoryCount()-1;
         if (index < 0) { return; }
-        itemArt[index].GetComponentInChildren<SpriteRenderer>().sprite = null;
+        ingredientArt[index].GetComponentInChildren<SpriteRenderer>().sprite = null;
     }
 }

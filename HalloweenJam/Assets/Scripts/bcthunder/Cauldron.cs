@@ -69,6 +69,7 @@ public class Cauldron : MonoBehaviour
         }
         Potion foundPotion = potionList.Find(x => x.totalValue == value);
         if (foundPotion == null) { foundPotion = badPotion;}
+        ClearCauldron();
         return foundPotion;
     }
 

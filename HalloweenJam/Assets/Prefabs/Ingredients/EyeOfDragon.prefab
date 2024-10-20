@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 609832675683202917}
   - component: {fileID: -2707058114727275320}
   m_Layer: 6
-  m_Name: EyeOfNewt
+  m_Name: EyeOfDragon
   m_TagString: Ingredient
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
