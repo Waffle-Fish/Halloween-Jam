@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -10,6 +11,8 @@ public class CustomerSpawner : MonoBehaviour
     [SerializeField] public Transform[] walkPoints;
 
     [SerializeField] public int moveSpeed = 10;
+
+    String[] meows = {"meow1", "meow2", "meow3"};
 
     Transform targetWalkPoint;
 
@@ -33,12 +36,14 @@ public class CustomerSpawner : MonoBehaviour
 
             if (showOrder && customer.transform.position == walkPoints[1].transform.position) {
                 order.DisplayOrder();
+                // AudioManager.Instance.PlaySFX(meows[UnityEngine.Random.Range(0,2)]);
                 showOrder = false;
             }
 
             if (leaveBar) {
                 customerAnimator.SetBool("walkDown", true);
                 customer.transform.position = Vector2.MoveTowards(customer.transform.position, targetWalkPoint.transform.position, moveSpeed * Time.deltaTime);
+                // AudioManager.Instance.PlaySFX(meows[UnityEngine.Random.Range(0,2)]);
 
                 if (customer.transform.position == walkPoints[0].transform.position) {
                     Debug.Log("Customer has succesfully been remove");

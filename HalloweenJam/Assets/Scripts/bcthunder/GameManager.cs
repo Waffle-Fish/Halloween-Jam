@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     int totalPoints = 0;
 
     // Level Duration
-    public float levelDuration = 360;
+    public float levelDuration = 420;
 
     // Start is called before the first frame update
     void Start()
@@ -30,41 +30,52 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Handling Customer Spawns
-        for (int i = 0; i < customers.Length; i++ )
+        if (levelDuration >= 0) 
         {
-            // If there is a customer, countdown their order time, else countdown their spawn time
-            if (customers[i] != null) {
-                orderTimers[i] -= Time.deltaTime;
-            } else {
-                customerSpawnerTime[i] -= Time.deltaTime;
-            }
-
-            // If the order countdown finishes, customer leaves
-            if (orderTimers[i] <= 0) {
-                Debug.Log("Customer " + i + " Removed");
-                RemoveCustomer(i);
-            }
-
-            // If the customer spawn time finishes, spawn the customer
-            if (customerSpawnerTime[i]  <= 0) {
-                customerSpawnerTime[i] = 15;
-                customerSpawners[i].SpawnCustomer();
-                customers[i] = customerSpawners[i].GetCustomer();
-            }
-
-            // If the player gives the customer the right Potion score points, else "trash" the potion
-            if (customerPotions[i] != null) {
-                CustomerBehavior customerToCheck = customerPotions[i].GetComponent<CustomerBehavior>();
-                if (customerToCheck.order.orderedPotion == customerPotions[i])
-                {
-                    ScorePoints();
+            // Handling Customer Spawns
+            for (int i = 0; i < customers.Length; i++ )
+            {
+                // If there is a customer, countdown their order time, else countdown their spawn time
+                if (customers[i] != null) {
+                    orderTimers[i] -= Time.deltaTime;
+                } else {
+                    customerSpawnerTime[i] -= Time.deltaTime;
                 }
-                else
-                {
-                    customerPotions[i] = null;
+
+                // If the order countdown finishes, customer leaves
+                if (orderTimers[i] <= 0) {
+                    Debug.Log("Customer " + i + " Removed");
+                    RemoveCustomer(i);
+                }
+
+                // If the customer spawn time finishes, spawn the customer
+                if (customerSpawnerTime[i]  <= 0) {
+                    customerSpawnerTime[i] = 15;
+                    customerSpawners[i].SpawnCustomer();
+                    customers[i] = customerSpawners[i].GetCustomer();
+                }
+
+                // If the player gives the customer the right Potion score points, else "trash" the potion
+                if (customerPotions[i] != null) {
+                    CustomerBehavior customerToCheck = customerPotions[i].GetComponent<CustomerBehavior>();
+                    if (customerToCheck.order.orderedPotion == customerPotions[i])
+                    {
+                        ScorePoints();
+                        RemoveCustomer(i);
+                    }
+                    else
+                    {
+                        customerPotions[i] = null;
+                    }
                 }
             }
+
+            levelDuration -= Time.deltaTime;
+
+        } else 
+        {
+            Debug.Log("Game Over!");
+            AudioManager.Instance.musicSource.Stop();
         }
     }
 
