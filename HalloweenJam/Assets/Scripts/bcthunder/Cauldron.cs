@@ -22,7 +22,7 @@ public class Cauldron : MonoBehaviour
     [SerializeField]
     private Potion badPotion;
     public bool IsPotionGrabbable { get; private set; } = false;
-    private List<Ingredient> inCauldron = new();
+    public List<Ingredient> inCauldron = new();
     private int numIngrAdded = 0;
 
     private void Awake() {

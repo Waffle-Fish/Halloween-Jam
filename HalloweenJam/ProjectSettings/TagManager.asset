@@ -8,6 +8,7 @@ TagManager:
   - Ingredient
   - Cauldron
   - Customer
+  - Trash
   layers:
   - Default
   - TransparentFX

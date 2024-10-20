@@ -1,8 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Numerics;
-using System.Security.Cryptography;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 
 public class CustomerBehavior : MonoBehaviour

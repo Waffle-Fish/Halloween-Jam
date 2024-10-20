@@ -114,6 +114,8 @@ public class PlayerControls : MonoBehaviour
     {
         if (objectCurrentlyOn && objectCurrentlyOn.CompareTag("Cauldron")) {
             UseCauldron();
+        } else if (objectCurrentlyOn && objectCurrentlyOn.CompareTag("Trash")){
+            ThrowAway();
         } else {
             ProcessDrop();
         }
@@ -189,6 +191,13 @@ public class PlayerControls : MonoBehaviour
         if (playerInventory.InventoryCount() <= 0 || cauldron.IsFull()) { return; }
         DropTop();
         cauldron.AddIngredient(playerInventory.RemoveItem());
+    }
+
+    private void ThrowAway()
+    {
+        if (playerInventory.InventoryCount() <= 0) { return; }
+        DropTop();
+        playerInventory.RemoveItem();
     }
 
     private void CollectPotion() {

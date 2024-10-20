@@ -6,11 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/Scenes/Final Scenes/MainMenu.unity
+    guid: 0789d89888d79f440938dc70641a6514
   - enabled: 1
-    path: Assets/Scenes/Waffle Scenes/Test Give Potion.unity
-    guid: 9967f67060a76634c8735e2a6b9b5a03
+    path: Assets/Scenes/Final Scenes/Level1.unity
+    guid: cc3cc1890fbcf9349b9f7e26cc61d028
   - enabled: 1
     path: Assets/Scenes/bcthunder/GameOver.unity
     guid: e08c5fbc5cbfd214caa765d6b6b4864b
