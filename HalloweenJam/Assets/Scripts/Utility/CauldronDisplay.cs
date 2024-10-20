@@ -56,4 +56,14 @@ public class CauldronDisplay : MonoBehaviour
         barPos.x = finalXScale / 2f;
         bar.localPosition = -barPos;
     }
+
+    public void ReCenterBar(int numIngrAdded) {
+        float percentComplete = bar.localScale.x / finalXScale;
+        float sectionLength = finalXScale / numIngrAdded;
+        barScale.x = sectionLength * percentComplete;
+        bar.localScale = barScale;
+
+        barPos.x = bar.localScale.x * 2f;
+        bar.localPosition = -barPos;
+    }
 }
