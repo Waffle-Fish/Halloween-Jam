@@ -5,13 +5,16 @@ using UnityEngine;
 public class Cauldron : MonoBehaviour
 {
     [Header("Timer")]
-    [SerializeField]
     [Tooltip("How long it takes to cook one ingredient")]
-    private int cookingTime;
-    [SerializeField]
+    public int cookingTime;
     [Tooltip("How long it takes to burn the whole pot")]
-    private int burnTime;
-    private float stopwatch;
+    public int burnTime;
+    [SerializeField]
+    CauldronDisplay cookDisplay;
+    [SerializeField]
+    CauldronDisplay burnDisplay;
+
+    public float Stopwatch {get; private set;}
 
     [Header("Potion stuff")]
     [SerializeField]
@@ -28,35 +31,41 @@ public class Cauldron : MonoBehaviour
         }
     }
 
+    private void Start() {
+        cookDisplay.SetDuration(cookingTime);
+        burnDisplay.SetDuration(burnTime);
+    }
+
     // Update is called once per frame
     void Update()
     {
         if (inCauldron.Count <= 0) return;
-        stopwatch += Time.deltaTime;
-        IsPotionGrabbable = stopwatch >= cookingTime * inCauldron.Count;
-        if (stopwatch >= cookingTime * inCauldron.Count + burnTime) {
+
+        // Cook pot
+        if (!cookDisplay.gameObject.activeInHierarchy) cookDisplay.gameObject.SetActive(true);
+        Stopwatch += Time.deltaTime;
+        IsPotionGrabbable = Stopwatch >= cookingTime * inCauldron.Count;
+
+        // Burn Pot
+        // if (IsPotionGrabbable & !burnDisplay.gameObject.activeInHierarchy) {
+        //     burnDisplay.gameObject.SetActive(true);
+        // }
+        if (Stopwatch >= cookingTime * inCauldron.Count + burnTime) {
             ClearCauldron();
         }
-    }
-
-    void ClearCauldron()
-    {
-        inCauldron.Clear();
-        ResetStopwatch();
-    }
-
-    private void ResetStopwatch() {
-        stopwatch = 0f;
     }
 
     // Add an ingredient to the pot
     public void AddIngredient(Ingredient ingr)
     {
-        if (inCauldron.Count <= 5)
-        {
-            inCauldron.Add(ingr);
-            ResetStopwatch();
-        }
+        if (IsFull()) return;
+        inCauldron.Add(ingr);
+        cookDisplay.SetDuration(cookDisplay.Duration + cookingTime);
+        burnDisplay.gameObject.SetActive(false);
+    }
+
+    public bool IsFull() {
+        return inCauldron.Count >= 5;
     }
 
     public Potion CollectPotion()
@@ -71,6 +80,18 @@ public class Cauldron : MonoBehaviour
         if (foundPotion == null) { foundPotion = badPotion;}
         ClearCauldron();
         return foundPotion;
+    }
+
+    void ClearCauldron()
+    {
+        inCauldron.Clear();
+        cookDisplay.gameObject.SetActive(false);
+        burnDisplay.gameObject.SetActive(false);
+        ResetStopwatch();
+    }
+
+    private void ResetStopwatch() {
+        Stopwatch = 0f;
     }
 
     private int CalculatePotionValue(Potion p) {

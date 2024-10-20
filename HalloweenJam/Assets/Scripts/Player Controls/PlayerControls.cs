@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerControls : MonoBehaviour
@@ -164,7 +165,7 @@ public class PlayerControls : MonoBehaviour
     private void UseCauldron()
     {
         if (!cauldron) { cauldron = objectCurrentlyOn.GetComponent<Cauldron>(); }
-        if (playerInventory.InventoryCount() <= 0) { return; }
+        if (playerInventory.InventoryCount() <= 0 || cauldron.IsFull()) { return; }
         DropTop();
         cauldron.AddIngredient(playerInventory.RemoveItem());
     }
@@ -189,5 +190,6 @@ public class PlayerControls : MonoBehaviour
         int index = playerInventory.InventoryCount()-1;
         if (index < 0) { return; }
         ingredientArt[index].GetComponentInChildren<SpriteRenderer>().sprite = null;
+        // ingredientArt[index].gameObject.SetActive(false);// = null;
     }
 }
