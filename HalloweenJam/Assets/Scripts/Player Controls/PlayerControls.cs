@@ -171,7 +171,9 @@ public class PlayerControls : MonoBehaviour
     }
 
     private void CollectPotion() {
-        currentPotion = objectCurrentlyOn.GetComponent<Cauldron>().CollectPotion();
+        Cauldron caul = objectCurrentlyOn.GetComponent<Cauldron>();
+        if (!caul.IsPotionGrabbable) return;
+        currentPotion = caul.CollectPotion();
         if (!currentPotion) return;
         potionArt.GetComponent<SpriteRenderer>().sprite = currentPotion.potionObject.GetComponentInChildren<SpriteRenderer>().sprite ;
     }

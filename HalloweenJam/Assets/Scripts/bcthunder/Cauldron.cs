@@ -31,7 +31,7 @@ public class Cauldron : MonoBehaviour
         }
     }
 
-    private void Start() {
+    private void OnEnable() {
         cookDisplay.SetDuration(cookingTime);
         burnDisplay.SetDuration(burnTime);
     }
@@ -47,9 +47,12 @@ public class Cauldron : MonoBehaviour
         IsPotionGrabbable = Stopwatch >= cookingTime * inCauldron.Count;
 
         // Burn Pot
-        // if (IsPotionGrabbable & !burnDisplay.gameObject.activeInHierarchy) {
-        //     burnDisplay.gameObject.SetActive(true);
-        // }
+        if (IsPotionGrabbable) {
+            cookDisplay.gameObject.SetActive(false);
+            if (!burnDisplay.gameObject.activeInHierarchy) {
+                burnDisplay.gameObject.SetActive(true);
+            }
+        }
         if (Stopwatch >= cookingTime * inCauldron.Count + burnTime) {
             ClearCauldron();
         }
