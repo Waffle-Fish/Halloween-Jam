@@ -1116,7 +1116,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ade90ea36e015b246bc8a8c2752d675b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  possiblePotions: []
+  possiblePotions:
+  - {fileID: 11400000, guid: b9a71ac58bf25e24397131828f11c5a5, type: 2}
   possibleOrderDisplay:
   - {fileID: 1556582558}
   - {fileID: 2112498071}
