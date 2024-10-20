@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8093f19cde33bea479214f13b829cea8, type: 3}
   m_Name: HairGrowthPotion
   m_EditorClassIdentifier: 
-  potion_name: LovePotion
+  potionName: 
   ingredients:
   - {fileID: 11400000, guid: 1b9bf559321c01e49ad58eda8db3380f, type: 2}
   - {fileID: 11400000, guid: 1b9bf559321c01e49ad58eda8db3380f, type: 2}
   - {fileID: 11400000, guid: 75b97ee14d4dd4b43a6a4b7544f23fac, type: 2}
+  orderDisplay: {fileID: 0}
+  totalValue: 0
+  potionObject: {fileID: 5663009007957866991, guid: 8be1530e3e1d904489c7831c8efe051b, type: 3}

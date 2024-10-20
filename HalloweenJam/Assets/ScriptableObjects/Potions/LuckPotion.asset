@@ -12,10 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8093f19cde33bea479214f13b829cea8, type: 3}
   m_Name: LuckPotion
   m_EditorClassIdentifier: 
-  potion_name: LovePotion
+  potionName: 
   ingredients:
   - {fileID: 11400000, guid: b4663610b55167e49a2ec93c1a442fe4, type: 2}
   - {fileID: 11400000, guid: 86761409637e39041bc3a0f2a795591e, type: 2}
   - {fileID: 11400000, guid: 1b9bf559321c01e49ad58eda8db3380f, type: 2}
   - {fileID: 11400000, guid: c6617c7ad7d9fc04b80aa620c341b83d, type: 2}
   - {fileID: 11400000, guid: 75b97ee14d4dd4b43a6a4b7544f23fac, type: 2}
+  orderDisplay: {fileID: 0}
+  totalValue: 0
+  potionObject: {fileID: 4578630168117121864, guid: d8cc133afe22fcd418a3f119d26ab270, type: 3}

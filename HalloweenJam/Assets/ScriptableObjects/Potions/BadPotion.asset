@@ -9,9 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b91591bc953d0a64cbea6c26d5c0385e, type: 3}
-  m_Name: MidtermExam
+  m_Script: {fileID: 11500000, guid: 8093f19cde33bea479214f13b829cea8, type: 3}
+  m_Name: BadPotion
   m_EditorClassIdentifier: 
-  ingredient_name: MidtermExams
-  gameObject: {fileID: 3642321655232558196, guid: 4761fcb24f5cf134b99dc68cd040495f, type: 3}
-  value: 10000
+  potionName: BadPotion
+  ingredients: []
+  orderDisplay: {fileID: 0}
+  totalValue: 0
+  potionObject: {fileID: 7186627204272297340, guid: c1f94d2054452b940972b47cffc51981, type: 3}

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class PlayerControls : MonoBehaviour
@@ -18,19 +19,23 @@ public class PlayerControls : MonoBehaviour
     [SerializeField]
     List<ObjectPool> ingredientPools;
     PlayerInventory playerInventory;
-    PlayerPickUp playerPickUp;
 
     [Header("Cauldron")]
     Cauldron cauldron;
 
-
+    [Header("Holding Object")]
+    [SerializeField]
+    [Range(0,5)]
+    private int maxStackSize = 5;
+    Potion currentPotion;
+    // Reference to the game objects that the character carries in the world
+    List<GameObject> itemArt = new();
 
     private GameObject objectCurrentlyOn;
     
     private void Awake() {
         rb2D = GetComponent<Rigidbody2D>();
         playerInventory = GetComponent<PlayerInventory>();
-        playerPickUp = GetComponent<PlayerPickUp>();
         
         playerInput = new();
         playerInput.Controls.SwitchCharacter.performed += OnControlSwitchCharacter;
@@ -38,6 +43,14 @@ public class PlayerControls : MonoBehaviour
         playerInput.Controls.Drop.performed += OnDrop;
 
         switchCharacter = transform.parent.GetComponent<SwitchCharacter>();
+    }
+
+    private void Start() {
+        for (int i = 0; i < maxStackSize; i++)
+        {
+            itemArt.Add(transform.GetChild(i).gameObject);
+        }
+
     }
 
     private void OnEnable() {
@@ -48,12 +61,15 @@ public class PlayerControls : MonoBehaviour
         playerInput.Disable();
     }
 
-    private void Update()
-    {
+    private void Update() {
         Move();
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
+        objectCurrentlyOn = other.gameObject;
+    }
+
+    private void OnTriggerStay2D(Collider2D other) {
         objectCurrentlyOn = other.gameObject;
     }
 
@@ -64,7 +80,6 @@ public class PlayerControls : MonoBehaviour
     private void Move()
     {
         moveDir = playerInput.Controls.Move.ReadValue<Vector2>();
-        // transform.position += moveForce * Time.deltaTime * (Vector3)moveDir;
         rb2D.AddForce(moveForce * moveDir, ForceMode2D.Force);
     }
 
@@ -89,7 +104,10 @@ public class PlayerControls : MonoBehaviour
         ObjectPool ingrToDropPool = null;
         if (playerInventory.InventoryCount() <= 0) return;
 
-        // Getting referenc to ingredient
+        // Update Holding Stack
+        DropTop();
+
+        // Getting reference to ingredient
         ingr = playerInventory.RemoveItem();
         foreach (var pool in ingredientPools)
         {
@@ -99,7 +117,9 @@ public class PlayerControls : MonoBehaviour
 
         // Dropping ingredient
         ingrToDrop = ingrToDropPool.GetObject();
-        ingrToDrop.transform.position = transform.position;
+        Vector3 dropPos = itemArt[0].transform.position;
+        dropPos.y -= 1.5f;
+        ingrToDrop.transform.position = dropPos;
         ingrToDrop.SetActive(true);
     }
 
@@ -108,6 +128,9 @@ public class PlayerControls : MonoBehaviour
         if (!objectCurrentlyOn) { return;}
         switch (objectCurrentlyOn.tag)
         {
+            case "Cauldron":
+                CollectPotion();
+                break;
             case "Barrel":
                 GetIngredientFromBarrel();
                 break;
@@ -120,11 +143,18 @@ public class PlayerControls : MonoBehaviour
     }
 
     private void GetIngredientFromBarrel() {
-        playerInventory.AddToInventory(objectCurrentlyOn.GetComponent<Barrel>().ingr);
+        if (playerInventory.InventoryCount() >= maxStackSize) return;
+        Ingredient ingr = objectCurrentlyOn.GetComponent<Barrel>().ingr;
+        playerInventory.AddToInventory(ingr);
+        ChangeItemArt(ingr.gameObject.transform.GetChild(0).gameObject);
     }
 
     private void PickUpIngredient() {
-        playerInventory.AddToInventory(objectCurrentlyOn.transform.parent.GetComponent<IngredientHolder>().ingredient);
+        if (playerInventory.InventoryCount() > maxStackSize) return;
+        Ingredient ingr = objectCurrentlyOn.transform.parent.GetComponent<IngredientHolder>().ingredient;
+
+        playerInventory.AddToInventory(ingr);
+        ChangeItemArt(objectCurrentlyOn);
         objectCurrentlyOn.SetActive(false);
     }
 
@@ -132,6 +162,29 @@ public class PlayerControls : MonoBehaviour
     {
         if (!cauldron) { cauldron = objectCurrentlyOn.GetComponent<Cauldron>(); }
         if (playerInventory.InventoryCount() <= 0) { return; }
+        DropTop();
         cauldron.AddIngredient(playerInventory.RemoveItem());
+    }
+
+    private void CollectPotion() {
+        currentPotion = objectCurrentlyOn.GetComponent<Cauldron>().CollectPotion();
+        if (!currentPotion) return;
+        ChangeItemArt(currentPotion.potionObject);
+    }
+
+    private void GivePotion() {
+
+    }
+
+    private void ChangeItemArt(GameObject newItem) {
+        int index = math.clamp(playerInventory.InventoryCount(),0,maxStackSize);
+        if (index >= maxStackSize) { return; }
+        itemArt[index].GetComponentInChildren<SpriteRenderer>().sprite = newItem.GetComponent<SpriteRenderer>().sprite;
+    }
+
+    private void DropTop() {
+        int index = playerInventory.InventoryCount()-1;
+        if (index < 0) { return; }
+        itemArt[index].GetComponentInChildren<SpriteRenderer>().sprite = null;
     }
 }

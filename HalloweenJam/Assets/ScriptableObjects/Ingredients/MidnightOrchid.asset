@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredient_name: MidnightOrchid
   gameObject: {fileID: 392223760299531179, guid: 0b99a54fdbddf644b82572d06ff5d19c, type: 3}
+  value: 1000

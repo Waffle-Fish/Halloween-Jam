@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredient_name: EyeOfNewt
   gameObject: {fileID: 2245791830572624176, guid: 696b1a5c91eac6648900757ad3c77e29, type: 3}
+  value: 10

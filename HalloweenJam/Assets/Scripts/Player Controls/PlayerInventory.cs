@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
 {
-    List<Ingredient> inventory = new();
+    Stack<Ingredient> inventory = new();
 
     public void AddToInventory(Ingredient ing) {
-        inventory.Add(ing);
+        inventory.Push(ing);
     }
 
     /// <summary>
@@ -16,12 +16,11 @@ public class PlayerInventory : MonoBehaviour
     /// </summary>
     /// <param name="ing"></param>
     public Ingredient RemoveItem() {
-        Ingredient ing = inventory[^1];
-        inventory.RemoveAt(inventory.Count - 1);
-        return ing;
+        return inventory.Pop();
     }
 
     public int InventoryCount() {
+        // Debug.Log(inventory.Count);
         return inventory.Count;
     }
 }

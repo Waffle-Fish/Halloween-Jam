@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8093f19cde33bea479214f13b829cea8, type: 3}
   m_Name: PoisonPotion
   m_EditorClassIdentifier: 
-  potion_name: LovePotion
+  potionName: 
   ingredients:
   - {fileID: 11400000, guid: 1b9bf559321c01e49ad58eda8db3380f, type: 2}
   - {fileID: 11400000, guid: c6617c7ad7d9fc04b80aa620c341b83d, type: 2}
+  orderDisplay: {fileID: 0}
+  totalValue: 0
+  potionObject: {fileID: 64099628463884543, guid: 8caa2a34719ccb743aa948756bdfb88e, type: 3}

@@ -11,10 +11,22 @@ public class Cauldron : MonoBehaviour
     [SerializeField]
     [Tooltip("How long it takes to burn the whole pot")]
     private int burnTime;
-
-    private List<Ingredient> inCauldron = new();
     private float stopwatch;
+
+    [Header("Potion stuff")]
+    [SerializeField]
+    private List<Potion> potionList;
+    [SerializeField]
+    private Potion badPotion;
     public bool IsPotionGrabbable { get; private set; } = false;
+    private List<Ingredient> inCauldron = new();
+
+    private void Awake() {
+        foreach (Potion potion in potionList)
+        {
+            potion.totalValue = CalculatePotionValue(potion);
+        }
+    }
 
     // Update is called once per frame
     void Update()
@@ -45,5 +57,27 @@ public class Cauldron : MonoBehaviour
             inCauldron.Add(ingr);
             ResetStopwatch();
         }
+    }
+
+    public Potion CollectPotion()
+    {
+        if (inCauldron.Count <= 0) { return null;}
+        int value = 0;
+        foreach (Ingredient ingr in inCauldron)
+        {
+            value += ingr.value;
+        }
+        Potion foundPotion = potionList.Find(x => x.totalValue == value);
+        if (foundPotion == null) { foundPotion = badPotion;}
+        return foundPotion;
+    }
+
+    private int CalculatePotionValue(Potion p) {
+        int value = 0;
+        foreach (var ingr in p.ingredients)
+        {
+            value += ingr.value;
+        }
+        return value;
     }
 }
