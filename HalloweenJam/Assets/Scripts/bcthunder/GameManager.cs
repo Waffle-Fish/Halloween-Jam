@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance { get; private set;}
     // Managing the Customers
     public float[] orderTimers = { 45, 45, 45 };
     public float[] customerSpawnerTime = { 15, 15, 15 };
@@ -16,15 +17,15 @@ public class GameManager : MonoBehaviour
 
     // Managing Points
     public int pointsPerPotion = 10;
+    public int pointsLost = 5;
     int totalPoints = 0;
 
     // Level Duration
     public float levelDuration = 420;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
+    private void Awake() {
+        if (Instance != null && Instance != this) Destroy(this); 
+        else Instance = this;
     }
 
     // Update is called once per frame
@@ -55,19 +56,19 @@ public class GameManager : MonoBehaviour
                     customers[i] = customerSpawners[i].GetCustomer();
                 }
 
-                // If the player gives the customer the right Potion score points, else "trash" the potion
-                if (customerPotions[i] != null) {
-                    CustomerBehavior customerToCheck = customerPotions[i].GetComponent<CustomerBehavior>();
-                    if (customerToCheck.order.orderedPotion == customerPotions[i])
-                    {
-                        ScorePoints();
-                        RemoveCustomer(i);
-                    }
-                    else
-                    {
-                        customerPotions[i] = null;
-                    }
-                }
+                // // If the player gives the customer the right Potion score points, else "trash" the potion
+                // if (customerPotions[i] != null) {
+                //     CustomerBehavior customerToCheck = customerPotions[i].GetComponent<CustomerBehavior>();
+                //     if (customerToCheck.order.orderedPotion == customerPotions[i])
+                //     {
+                //         ScorePoints();
+                //         RemoveCustomer(i);
+                //     }
+                //     else
+                //     {
+                //         customerPotions[i] = null;
+                //     }
+                // }
             }
 
             levelDuration -= Time.deltaTime;
@@ -79,13 +80,22 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void RemoveCustomer(int index)
+    public void RemoveCustomer(int index)
     {   
         customerSpawners[index].RemoveCustomer();
         customers[index] = null;
         orderTimers[index] = 45;
     }
 
-    void ScorePoints() { totalPoints += pointsPerPotion; }
+    public void ScorePoints() { totalPoints += pointsPerPotion; }
+    public void LosePoints() { totalPoints -= pointsLost; }
 
+    // If customer, call this function to find where you are in the index
+    public int FindSelf(GameObject customerToFind) {
+        int ind;
+        for (ind = 0; ind < customers.Length; ind++) {
+            if ((customers[ind]) == customerToFind) return ind;
+        }
+        return -1;
+    }
 }

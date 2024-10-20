@@ -8,6 +8,7 @@ public class CustomerOrders : MonoBehaviour
     public List<GameObject> possibleOrderDisplay = new();
 
     public Potion orderedPotion;
+    private Potion PotionGiven;
     public int orderNumber;
     public GameObject orderDisplay;
 
@@ -44,4 +45,21 @@ public class CustomerOrders : MonoBehaviour
         spriteRenderer.enabled = !spriteRenderer.enabled;
     }
 
+    public void RecievePotion(Potion potRec) {
+        PotionGiven = potRec;
+        ComparePotion();
+    }
+
+    private void ComparePotion() {
+        if (PotionGiven == orderedPotion) {
+            GameManager.Instance.ScorePoints();
+        } else {
+            GameManager.Instance.LosePoints();
+        }
+        Leave();
+    }
+
+    private void Leave() {
+        GameManager.Instance.RemoveCustomer(GameManager.Instance.FindSelf(this.gameObject));
+    }
 }

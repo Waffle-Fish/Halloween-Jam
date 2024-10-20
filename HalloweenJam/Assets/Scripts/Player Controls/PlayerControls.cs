@@ -132,6 +132,9 @@ public class PlayerControls : MonoBehaviour
         if (!objectCurrentlyOn) { return;}
         switch (objectCurrentlyOn.tag)
         {
+            case "Customer":
+                GivePotion();
+                break;
             case "Cauldron":
                 CollectPotion();
                 break;
@@ -179,7 +182,11 @@ public class PlayerControls : MonoBehaviour
     }
 
     private void GivePotion() {
+        if (!currentPotion) return;
+        objectCurrentlyOn.GetComponent<CustomerOrders>().RecievePotion(currentPotion);
 
+        currentPotion = null;
+        potionArt.GetComponent<SpriteRenderer>().sprite = null;
     }
 
     private void ChangeItemArt(GameObject newItem) {

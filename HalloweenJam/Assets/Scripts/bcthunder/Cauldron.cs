@@ -23,6 +23,7 @@ public class Cauldron : MonoBehaviour
     private Potion badPotion;
     public bool IsPotionGrabbable { get; private set; } = false;
     private List<Ingredient> inCauldron = new();
+    private int numIngrAdded = 0;
 
     private void Awake() {
         foreach (Potion potion in potionList)
@@ -61,13 +62,16 @@ public class Cauldron : MonoBehaviour
     {
         if (IsFull()) return;
         inCauldron.Add(ingr);
+        numIngrAdded++;
         if (!cookDisplay.gameObject.activeInHierarchy) cookDisplay.gameObject.SetActive(true);
         if (burnDisplay.gameObject.activeInHierarchy) {
             burnDisplay.gameObject.SetActive(false);
-            ResetStopwatch();
+            Stopwatch = TotalCookingDuration() - cookingTime;
             cookDisplay.SetDuration(cookingTime);
+            numIngrAdded = 1;
         } else {
             cookDisplay.SetDuration(TotalCookingDuration());
+            cookDisplay.ReCenterBar(numIngrAdded);
         }
     }
 
