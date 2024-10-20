@@ -1,16 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     // Managing the Customers
-    public static float[] orderTimers = { 45, 45, 45 };
-    public static float[] customerSpawnerTime = { 15, 15, 15 };
+    public float[] orderTimers = { 45, 45, 45 };
+    public float[] customerSpawnerTime = { 15, 15, 15 };
 
-    public static CustomerSpawner[] customerSpawners = {new CustomerSpawner(), new CustomerSpawner(), new CustomerSpawner()};
-    public static CustomerBehavior[] customers = {null, null, null};
-    public static Potion[] customerPotions = { null, null, null };
+    public CustomerSpawner[] customerSpawners = new CustomerSpawner[] {null, null, null};
+    public GameObject[] customers = {null, null, null};
+    public Potion[] customerPotions = { null, null, null };
     bool isCustomerSpawned;
 
     // Managing Points
@@ -21,7 +22,7 @@ public class GameManager : MonoBehaviour
     public float levelDuration = 360;
 
     // Start is called before the first frame update
-    void start()
+    void Start()
     {
 
     }
@@ -36,23 +37,27 @@ public class GameManager : MonoBehaviour
             if (customers[i] != null) {
                 orderTimers[i] -= Time.deltaTime;
             } else {
-                customerSpawnerTime -= Time.deltaTime;
+                customerSpawnerTime[i] -= Time.deltaTime;
             }
 
             // If the order countdown finishes, customer leaves
             if (orderTimers[i] <= 0) {
+                Debug.Log("Customer " + i + " Removed");
                 RemoveCustomer(i);
             }
 
             // If the customer spawn time finishes, spawn the customer
             if (customerSpawnerTime[i]  <= 0) {
+                Debug.Log("Customer " + i + " Spawned!");
                 customerSpawnerTime[i] = 15;
-                customers[i] = customerSpawners[i].SpawnCustomer();
+                customerSpawners[i].SpawnCustomer();
+                customers[i] = customerSpawners[i].GetCustomer();
             }
 
             // If the player gives the customer the right Potion score points, else "trash" the potion
             if (customerPotions[i] != null) {
-                if (customers[i].order.orderedPotion == customerPotions[i])
+                CustomerBehavior customerToCheck = customerPotions[i].GetComponent<CustomerBehavior>();
+                if (customerToCheck.order.orderedPotion == customerPotions[i])
                 {
                     ScorePoints();
                 }

@@ -4,21 +4,20 @@ using UnityEngine;
 
 public class CustomerOrders : MonoBehaviour
 {
-    public List<Potion> possiblePotions;
+    public List<Potion> possiblePotions;        // List of possible potions to make (Changed to game object)
     public List<GameObject> possibleOrderDisplay;
 
     public Potion orderedPotion;
     public int orderNumber;
     public GameObject orderDisplay;
 
-    public bool showOrderDisplay = false;
+    private SpriteRenderer spriteRenderer;
 
-    void start()
+    void Start()
     {
-        string four = 4
-        for (int i =0 i < 8 i++) {
-            dostuff;
-        }
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.enabled = false;
+        MakeOrder();
     }
 
     public void MakeOrder()
@@ -30,7 +29,7 @@ public class CustomerOrders : MonoBehaviour
 
     public void DisplayOrder()
     {
-        showOrderDisplay = true;
+        spriteRenderer.enabled = true;
     }
 
 }

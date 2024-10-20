@@ -1,30 +1,40 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
 public class CustomerBehavior : MonoBehaviour
 {
+    [SerializeField] Transform[] walkPoints;
+    [SerializeField] private float moveSpeed;
+    private int walkPointIndex = 0;
+
     public Sprite customerSprite;
 
-    public bool isReadyToOrder = true;
+    private bool isReadyToOrder = true;
 
-    CustomerOrders order = new CustomerOrders();
+    public CustomerOrders order;
 
+    void Awake() {
+        order = GetComponent<CustomerOrders>();
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        order = order.MakeOrder();
+        transform.position = walkPoints[walkPointIndex].transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!isReadyToOrder)
-        {
-            ReadyToOrder();
-            isReadyToOrder = false;
+        transform.position = Vector2.MoveTowards(transform.position, walkPoints[walkPointIndex+1].transform.position, moveSpeed * Time.deltaTime);
+
+        if (transform.position == walkPoints[1].position) {
+            DisplayOrder();
         }
+        
     }
 
     void DisplayOrder()
