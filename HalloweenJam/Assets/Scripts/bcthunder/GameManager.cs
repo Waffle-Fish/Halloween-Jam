@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,7 +19,7 @@ public class GameManager : MonoBehaviour
     // Managing Points
     public int pointsPerPotion = 10;
     public int pointsLost = 5;
-    int totalPoints = 0;
+    public int totalPoints = 0;
 
     // Level Duration
     public float levelDuration = 420;
@@ -75,8 +76,7 @@ public class GameManager : MonoBehaviour
 
         } else 
         {
-            Debug.Log("Game Over!");
-            AudioManager.Instance.musicSource.Stop();
+            GameOver();
         }
     }
 
@@ -85,6 +85,13 @@ public class GameManager : MonoBehaviour
         customerSpawners[index].RemoveCustomer();
         customers[index] = null;
         orderTimers[index] = 45;
+    }
+
+    public void GameOver()
+    {
+        Debug.Log("Game Over!");
+        AudioManager.Instance.musicSource.Stop();
+        SceneManager.LoadScene("GameOver");
     }
 
     public void ScorePoints() { totalPoints += pointsPerPotion; }

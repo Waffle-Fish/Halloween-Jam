@@ -27,6 +27,7 @@ public class PlayerControls : MonoBehaviour
     [Header("Holding Object")]
     [SerializeField]
     [Range(0,5)]
+
     private int maxStackSize = 5;
     [SerializeField]
     GameObject potionArt;
@@ -36,6 +37,9 @@ public class PlayerControls : MonoBehaviour
     
 
     private GameObject objectCurrentlyOn;
+
+    [Header("Animator")]
+    public Animator animator;
     
     private void Awake() {
         rb2D = GetComponent<Rigidbody2D>();
@@ -84,6 +88,20 @@ public class PlayerControls : MonoBehaviour
     private void Move()
     {
         moveDir = playerInput.Controls.Move.ReadValue<Vector2>();
+        animator.SetFloat("Speed", math.abs(moveDir.x + moveDir.y));
+
+        if (moveDir.x > 0) 
+        {
+            GetComponent<SpriteRenderer>().flipX = true;
+        }
+        else if (moveDir.x < 0) 
+        {
+            GetComponent<SpriteRenderer>().flipX = false;
+        } else
+        {
+            GetComponent<SpriteRenderer>().flipX = false;
+        }
+
         rb2D.AddForce(moveForce * moveDir, ForceMode2D.Force);
     }
 
